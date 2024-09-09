@@ -1,4 +1,4 @@
-const http = require('node:http')
+import http from 'node:http'
 
 // commonJS -> modulos clásicos de node
 const dittoJSON = require('./pokemon/ditto.json')

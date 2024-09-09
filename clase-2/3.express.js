@@ -1,6 +1,6 @@
-const express = require('express')
+import express from 'express'
 const ditto = require('./pokemon/ditto.json')
-const path = require('path')
+// const path = require('path')
 
 const PORT = process.env.PORT ?? 1234
 

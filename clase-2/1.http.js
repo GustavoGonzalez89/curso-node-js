@@ -1,13 +1,22 @@
 const http = require('node:http') // protocolo HTTP
 const fs = require('node:fs')
-
+const createTodoComponent = require('./componente.js')
 const desiredPort = process.env.PORT ?? 1234
 
 const processRequest = (req, res) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
 
   if (req.url === '/') {
-    res.end('<h1>Mi página</h1>')
+    fs.readFile('./public/index.html', (err, data) => {
+      if (err) {
+        res.statusCode = 500
+        res.end('<h1>500 Internal Server Error</h1>')
+      } else {
+        const todoComponent = createTodoComponent()
+        const html = data.toString().replace('<!-- TODO_COMPONENT -->', todoComponent)
+        res.end(html)
+      }
+    })
   } else if (req.url === '/imagen-super-bonita.png') {
     fs.readFile('./placa.png', (err, data) => {
       if (err) {
